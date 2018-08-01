@@ -1,0 +1,61 @@
+﻿@{
+    ViewData["Title"] = "Hardwares";
+}
+
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <div class="btn-group pull-right">
+            <button type="button" class="btn btn-success dropdown-toggle" 
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select Platform
+            </button>
+            <div class="dropdown-menu">
+                @foreach (var platform in @ViewBag.platforms) { 
+                     <a class="dropdown-item" href="/Hardwares/Index/?platform=@platform.Id">@platform.Name</a>
+                }
+            </div>
+        </div>
+        <button class="btn btn-primary pull-right block-button" onClick='redirectOnClick()'>Add Hardware</button>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hardware</th>
+                    <th>IP</th>
+                    <th>Status</th>
+                    <th>Platform</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var hardware in @ViewBag.hardwares)
+                {
+                    <tr>
+                        <td>@hardware.Name</td>
+                        <td>@hardware.IP</td>
+                        @if (@hardware.Leased)
+                        {
+                            <td><span class="badge badge-danger">Leased</span></td>
+                            /**/
+
+                        }
+                        else
+                        {
+                            <td><span class="badge badge-success">Available</span></td>
+                        }
+                        <td>@hardware.Platform.Name</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>function redirectOnClick() {
+        document.location = '/Hardwares/Add';
+}</script>

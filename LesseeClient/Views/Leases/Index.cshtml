@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    ViewData["Title"] = "Hardwares";
+}
+
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <button class="btn btn-primary pull-right block-button" onClick='window.location="/Leases/Index?active=true"'>
+        Show Active
+        </button>
+        <button class="btn btn-primary pull-right block-button" onClick='window.location="/Leases/Index"'>
+        Show All
+        </button>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Hardware</th>
+                    <th>IP</th>
+                    <th>Platform</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var lease in @ViewBag.leases)
+                {
+                <tr>
+                    <td>@lease.Hardware.Name</td>
+                    <td>@lease.Hardware.IP</td>
+                    <td>@lease.Hardware.Platform.Name</td>
+                    @if (@lease.Active)
+                    {
+                    <td><span class="badge badge-danger">Active</span></td>
+                    /**/
+
+                    }
+                    else
+                    {
+                    <td><span class="badge badge-success">Not active</span></td>
+                    }
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+function redirectOnClick() {
+        document.location = '/Leases/Index?active=true';
+}</script>
